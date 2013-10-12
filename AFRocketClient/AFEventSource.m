@@ -203,6 +203,7 @@ typedef NS_ENUM(NSUInteger, AFEventSourceState) {
 
     [self.lock lock];
     self.state = AFEventSourceConnecting;
+    self.offset = 0;
 
     self.requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:self.request];
     self.requestOperation.responseSerializer = [AFServerSentEventResponseSerializer serializer];
