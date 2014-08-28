@@ -282,6 +282,12 @@ typedef NS_ENUM(NSUInteger, AFEventSourceState) {
 
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode {    
     switch (eventCode) {
+        case NSStreamEventOpenCompleted: {
+            if ([self.delegate respondsToSelector:@selector(eventSourceDidOpen:)]) {
+                [self.delegate eventSourceDidOpen:self];
+            }
+            break;
+        }
         case NSStreamEventHasSpaceAvailable: {
             NSData *data = [stream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
             NSError *error = nil;
